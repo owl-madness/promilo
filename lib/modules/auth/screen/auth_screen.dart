@@ -111,8 +111,8 @@ class _AuthScreenState extends State<AuthScreen> {
                             Row(
                               children: [
                                 Checkbox(
-                                  value: false,
-                                  onChanged: null,
+                                  value: value.rememberMe,
+                                  onChanged: (_) => value.changeRemember(),
                                 ),
                                 Text('Remember Me')
                               ],

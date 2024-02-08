@@ -48,44 +48,44 @@ class _MeetupScreenState extends State<MeetupScreen> {
                           height: 150,
                           width: double.maxFinite,
                           child: CarouselSlider(
-                                items: List.generate(
-                                    MeetupScreen.imageList.length,
-                                    (index) => Container(
-                                          width: 280,
-                                          height: 170,
-                                          padding:
-                                              EdgeInsets.symmetric(horizontal: 20),
-                                          child: BannerImageWidget(
-                                              imagepath: MeetupScreen.imageList[index],
-                                              textData:
-                                                  'Popular Meetups\n in India'),
-                                        )),
-                                options: CarouselOptions(
-                                  enableInfiniteScroll: false,
-                                  disableCenter: true,
-                                  viewportFraction: 1,
-                                  aspectRatio: 0.5,
-                                  height: 150,
-                                  onPageChanged: (index, reason) {
-                                          print('index $index : $activeIndex');
-                                          setState(() {
-                                            activeIndex = index;
-                                          });
-                                        },
-                                ),
-                              ),
-                            
+                            items: List.generate(
+                                MeetupScreen.imageList.length,
+                                (index) => Container(
+                                      width: 280,
+                                      height: 170,
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 20),
+                                      child: BannerImageWidget(
+                                          imagepath:
+                                              MeetupScreen.imageList[index],
+                                          textData:
+                                              'Popular Meetups\n in India'),
+                                    )),
+                            options: CarouselOptions(
+                              enableInfiniteScroll: false,
+                              disableCenter: true,
+                              viewportFraction: 1,
+                              aspectRatio: 0.5,
+                              height: 150,
+                              onPageChanged: (index, reason) {
+                                print('index $index : $activeIndex');
+                                setState(() {
+                                  activeIndex = index;
+                                });
+                              },
+                            ),
+                          ),
                         ),
                         Gap(20),
                         CarouselIndicator(
-                                        count:
-                                            MeetupDetailScreen.listImage.length,
-                                        index: activeIndex,
-                                        color: Colors.black38,
-                                        activeColor: Colors.black,
-                                        cornerRadius: 20,width: 8,height: 8,
-                                      ),
-                       
+                          count: MeetupDetailScreen.listImage.length,
+                          index: activeIndex,
+                          color: Colors.black38,
+                          activeColor: Colors.black,
+                          cornerRadius: 20,
+                          width: 8,
+                          height: 8,
+                        ),
                       ],
                     ),
                   ),
@@ -110,7 +110,8 @@ class _MeetupScreenState extends State<MeetupScreen> {
                                     padding: EdgeInsets.only(
                                         left: 20.0,
                                         top: 5,
-                                        right: MeetupScreen.imageList.length == (index + 1)
+                                        right: MeetupScreen.imageList.length ==
+                                                (index + 1)
                                             ? 25
                                             : 0),
                                     child: PeopleCardWidget(),

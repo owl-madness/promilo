@@ -12,6 +12,7 @@ import 'package:crypto/crypto.dart';
 class AuthProvider extends ChangeNotifier {
   bool validated = false;
   bool passwordVisible = true;
+  bool rememberMe= true;
   Dio dio = Dio()
     ..interceptors.add(PrettyDioLogger(
         requestHeader: true,
@@ -77,6 +78,11 @@ class AuthProvider extends ChangeNotifier {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Invalid ID or Password')));
     }
+  }
+  
+  changeRemember() {
+    rememberMe = !rememberMe;
+    notifyListeners();
   }
 
   textChanged(String username, String password) {

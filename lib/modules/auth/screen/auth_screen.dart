@@ -142,7 +142,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                 _usernameController.text.trim(),
                                 _passwordController.text.trim())
                             : null,
-                        child: Text(
+                        child: value.isLoading ? CircularProgressIndicator() : Text(
                           'Submit',
                           style: TextStyle(color: Colors.white),
                         ),

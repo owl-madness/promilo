@@ -12,6 +12,7 @@ import 'package:crypto/crypto.dart';
 class AuthProvider extends ChangeNotifier {
   bool validated = false;
   bool passwordVisible = true;
+  bool isLoading= false;
   bool rememberMe= true;
   Dio dio = Dio()
     ..interceptors.add(PrettyDioLogger(
@@ -46,6 +47,8 @@ class AuthProvider extends ChangeNotifier {
   loginUser(BuildContext context, String username, String password) async {
     if (username.isNotEmpty && password.isNotEmpty) {
       try {
+        isLoading = true;
+        notifyListeners();
         var bytes = utf8.encode(password);
         var digest = sha256.convert(bytes).toString();
         FormData formData = FormData.fromMap({
@@ -58,6 +61,8 @@ class AuthProvider extends ChangeNotifier {
         Response response =
             await dio.post(ApiUrls.baseUrl + ApiUrls.loginApi, data: formData);
         if (response.statusCode == 200) {
+          isLoading = true;
+        notifyListeners();
           var model = LoginResponseModel.fromJson(response.data);
           //store access token and refresh token from model
           if (model.response?.accessToken != null) {
@@ -71,10 +76,16 @@ class AuthProvider extends ChangeNotifier {
         }
         return null;
       } catch (e) {
+        isLoading = false;
+        notifyListeners();
+        ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Invalid ID or Password')));
         print(e);
         throw Exception(e);
       }
     } else {
+       isLoading = true;
+        notifyListeners();
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Invalid ID or Password')));
     }
